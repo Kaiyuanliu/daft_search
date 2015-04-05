@@ -1,0 +1,21 @@
+{
+    "name": "daftsearch/daftsearch-php",
+    "description": "Daft SOAP API Library",
+    "require": {
+        "php": "5.3",
+        "ext-soap": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kaiyuan Liu",
+            "homepage": "https://github.com/Kaiyuanliu"
+        }
+    ],
+    "autoload": {
+      "psr-4": { "DaftSearch\\": "lib/"}
+    }
+}

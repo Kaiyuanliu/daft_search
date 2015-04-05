@@ -1,0 +1,11 @@
+# for composer
+/vendor/
+
+# for Mac OS
+.DS_Store
+
+# composer.lock file
+composer.lock
+
+# phpstorm
+.idea/
