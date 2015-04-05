@@ -114,7 +114,7 @@ class ApiRequestor
      * @throws \DaftSearch\Exception\Unknown
      * @throws \Exception
      * @todo To check $action validation before make soap request, if it is
-     *       invalid, throws Error\Api error
+     *       invalid, throws Exception\Api exception
      */
     private function _soapRequest($action, $base, $params, $soapOpts)
     {
@@ -123,14 +123,14 @@ class ApiRequestor
             $response = $soapClient->$action($params);
             return $response;
         } catch (\SoapFault $e) {
-            $this->_handleSoapError($e);
+            $this->_handleSoapException($e);
         }
     }
 
     /**
      * To handle soap errors
      *
-     * @param \SoapFault $error The soap fault exception
+     * @param \SoapFault $exception The soap fault exception
      *
      * @throws \DaftSearch\Exception\Api
      * @throws \DaftSearch\Exception\Authentication
@@ -138,25 +138,25 @@ class ApiRequestor
      * @throws \DaftSearch\Exception\Unknown
      * @throws \Exception
      */
-    private function _handleSoapError($error)
+    private function _handleSoapException($exception)
     {
-        $errorCode = $error->faultcode;
-        $errorMsg = $error->faultstring;
-        switch ($errorCode) {
+        $exceptionCode = $exception->faultcode;
+        $exceptionMsg = $exception->faultstring;
+        switch ($exceptionCode) {
             case 'AuthenticationFailure':
-                throw new Exception\Authentication($errorMsg);
+                throw new Exception\Authentication($exceptionMsg);
                 break;
             case 'PermissionFailure':
-                throw new Exception\Permission($errorMsg);
+                throw new Exception\Permission($exceptionMsg);
                 break;
             case 'UnknownFailure':
-                throw new Exception\Unknown($errorMsg);
+                throw new Exception\Unknown($exceptionMsg);
                 break;
             case 'Client':
-                throw new Exception\Api($errorMsg);
+                throw new Exception\Api($exceptionMsg);
                 break;
             default:
-                throw new \Exception($errorMsg);
+                throw new \Exception($exceptionMsg);
         }
     }
 }
