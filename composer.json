@@ -2,7 +2,7 @@
     "name": "daftsearch/daftsearch-php",
     "description": "Daft SOAP API Library",
     "require": {
-        "php": ">=5.3",
+        "php": ">=5.3.3",
         "ext-soap": "*"
     },
     "require-dev": {
